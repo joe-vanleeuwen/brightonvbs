@@ -2,13 +2,14 @@ body {
     font-size: 62.5%;
     margin: 0;
     /*font-family: 'Poiret One', cursive;*/
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Mission Gothic Thin', sans-serif;
 }
 
 .wrapper {
     width: 96em;
     margin: 0 auto;
     position: relative;
+    padding: 4em 0 0;
 }
 
 .fade {
@@ -17,15 +18,15 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, rgba(256, 256, 256, 0) 0%, rgba(256, 256, 256, 1) 90%);
+    background: linear-gradient(to bottom, rgba(256, 256, 256, 0) 81%, rgba(256, 256, 256, 1) 90%);
 }
 
 header {
     /*color: #9E2117;*/
-    color: #000;
+    color: #fff;
     padding: 5em 0 10em;
     text-align: center;
-    background: url(../images/sea_background.jpg) no-repeat center center fixed; 
+    background: url(../images/header_bg.png) center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -39,6 +40,20 @@ h1 {
     z-index: 10;
 }
 
+.header_text_big {
+    background: rgba(0, 0, 0, 0.7);
+    width: 53%;
+    margin: 0 auto 0 14%;
+    padding: 10px;
+}
+
+.header_text_medium {
+    background: rgba(0, 0, 0, 0.7);
+    width: 61%;
+    margin: 0 auto 20px 14%;
+    padding: 10px;
+}
+
 h1.big {
     font-weight: 600;
     font-size: 15em;
@@ -46,7 +61,7 @@ h1.big {
 
 h1.medium {
     font-weight: 400;
-    font-size: 10em;
+    font-size: 9em;
     margin-bottom: .2em;
 }
 
