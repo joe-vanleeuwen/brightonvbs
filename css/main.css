@@ -1,0 +1,124 @@
+body {
+    font-size: 62.5%;
+    margin: 0;
+    /*font-family: 'Poiret One', cursive;*/
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.wrapper {
+    width: 96em;
+    margin: 0 auto;
+    position: relative;
+}
+
+.fade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(256, 256, 256, 0) 0%, rgba(256, 256, 256, 1) 90%);
+}
+
+header {
+    /*color: #9E2117;*/
+    color: #000;
+    padding: 5em 0 10em;
+    text-align: center;
+    background: url(../images/sea_background.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: relative;
+}
+
+h1 {
+    margin: 0;
+    position: relative;
+    z-index: 10;
+}
+
+h1.big {
+    font-weight: 600;
+    font-size: 15em;
+}
+
+h1.medium {
+    font-weight: 400;
+    font-size: 10em;
+    margin-bottom: .2em;
+}
+
+h1.small {
+    font-weight: 400;
+    font-style: italic;
+    font-size: 8em;
+}
+
+.of {
+    font-weight: 400;
+    font-style: italic;
+}
+
+.symbol-title {
+    display: block;
+    text-align: center;
+    font-size: 2.4em;
+    font-weight: 200;
+    margin-bottom: .5em;
+}
+
+.symbol-container {
+    width: 15em;
+    float: left;
+    margin-right: 10em;
+}
+
+.symbol-row .symbol-container:last-child {
+    margin-right: 0;
+}
+
+.symbol-row {
+    margin: 0 auto;
+}
+
+.symbol-row:first-child {
+    width: 65em;
+    margin-bottom: 5em;
+}
+
+.symbol-row:last-child {
+    width: 90em;
+}
+
+.symbol {
+    height: 15em;
+    width: 15em;
+}
+
+.what {
+    height: 100em;
+}
+
+
+
+/**
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    contenteditable attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that are clearfixed.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
