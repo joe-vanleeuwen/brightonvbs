@@ -5,6 +5,10 @@ body {
     font-family: 'Josefin Sans', sans-serif;
 }
 
+* {
+    /*vertical-align: bottom;*/
+}
+
 .wrapper {
     width: 96em;
     margin: 0 auto;
@@ -37,6 +41,7 @@ h1 {
     margin: 0;
     position: relative;
     z-index: 10;
+    text-align: center;
 }
 
 h1.big {
@@ -91,10 +96,74 @@ h1.medium {
     width: 15em;
 }
 
-.what {
-    height: 100em;
+hr {
+    margin-bottom: 5em;
 }
 
+/* FORM */
+
+footer {
+    background: #24367F;
+}
+
+footer h1 {
+    color: #FFF;
+    margin: .5em 0 .2em;
+}
+
+.form {
+    color: #FFF;
+    width: 80em;
+    margin: 0 auto;
+    margin-bottom: 2em;
+}
+
+.form-row {
+    display: block;
+    padding-bottom: 5em;
+}
+
+/*.what {
+    border: 1px solid;
+    display: inline-block;
+    padding: 1em;
+    border-radius: 4px;
+    background: #3BA3E8;
+    color: #FFF;
+}*/
+
+.form span {
+    font-size: 2em;
+    margin-right: .2em;
+    /*display: block;*/
+}
+
+.form input {
+    width: 8em;
+    padding: .5em;
+    font-size: 1.4em;
+    margin: 0;
+    background: #24367F;
+    border-color: #FFF;
+}
+
+.form input:focus {
+    border-color: #FFF;
+}
+
+.form input:first-child {
+    /*margin-right: 60em;*/
+}
+
+.single-input {
+    /*width: 20em;*/
+    display: inline-block;
+    margin-right: 5em;
+}
+
+option:first-child {
+    font-weight: bold;
+}
 
 
 /**
