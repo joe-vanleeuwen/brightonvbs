@@ -3,14 +3,10 @@ $(document).ready(function () {
     $('#day').html('<option>Day</option>' + makeOptions(1, 31).join(''));
     $('#year').html('<option>Year</option>' + makeOptions(2000, 2014).join(''));
     $('#grade').html('<option>Grade</option>' + makeGrades(1, 6).join(''));
-})
 
-// function makeOptions (start, end, type) {
-//     var options;
-//     for (start < end; start++) {
-//         options += '<option>'+new Date()+'</option>';
-//     }
-// }
+    phoneNumber('.parent .phone-number')
+    phoneNumber('.emergency .phone-number')
+})
 
 function makeOptions (start, end) {
     return _.map(_.range(start, end + 1), function (n) { return '<option>'+n+'</option>'; })
@@ -22,4 +18,26 @@ function makeMonths () {
 
 function makeGrades (start, end) {
     return _.map(_.range(start, end + 1), function (n) { return '<option>'+n+(['st', 'nd', 'rd'][n - 1] || 'th')+'</option>'})
+}
+
+function clickie (input, n) {
+    $(input).keyup(function() {
+        // val is numeric
+        if ($.isNumeric($(this).val())) {
+            // focus on next input
+            if ($(this).val().length >= n) $(this).next(input).focus();
+        // val is not numeric
+        } else {
+            // characters exist in input
+            $(this).css('background', $(this).val().length ? 'rgba(255, 0, 0, 0.35)' : 'white');
+        }
+    });
+}
+
+function phoneNumber (klass) {
+    // each over the inputs with class 'phone-number'
+    _.each($(klass), function (input, i) {
+        // make click event for each input
+        clickie(input, [3,3,4][i]);
+    })
 }

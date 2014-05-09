@@ -9,9 +9,14 @@
     <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,300italic' rel='stylesheet' type='text/css'><body>
 
     <header>
-        <div class="fade"></div>
-        <h1 class="medium">Sailing the Seven C's</h1>
-        <h1 class="big"><span class="of">of</span> History</h1>
+        <div class="header_text_medium">
+            <h1 class="medium">Sailing the Seven C's</h1>
+        </div>
+
+        <!-- <h1 class="small">the Seven C's of</h1> -->
+        <div class='header_text_big'>
+            <h1 class="big"><span class="of">of</span> History</h1>
+        </div>
     </header>
 
     <div class="wrapper">
@@ -58,19 +63,72 @@
 
     <footer class="sign-up">
         <h1 class="big">Sign Up</h1>
-        <hr>
+        <!-- <hr> -->
         <section class="form">
-            <div class="form-row">
+            <h3 class="sub-form-title">child</h3>
+            <section class="items">
+                <div class="form-row">
                     <span>name: </span>
-                    <input placeholder="first">
-                    <input placeholder="last">
+                    <input class="half-name short" placeholder="first">
+                    <input class="half-name short" placeholder="last">
                     <span>date of Birth: </span>
                     <select id="month"></select>
                     <select id="day"></select>
                     <select id="year"></select>
                     <span>grade: </span>
                     <select id="grade"></select>
-            </div>
+                </div>
+            </section>
+
+            <h3 class="sub-form-title">parent</h3>
+            <section class="items parent">
+                <div class="form-row">
+                    <span>name: </span>
+                    <input class="full-name long" placeholder="full name">
+                    <span>phone number: </span>
+                    <input class="phone-number" placeholder="XXX">
+                    <input class="phone-number" placeholder="XXX">
+                    <input class="phone-number long" placeholder="XXXX">
+                    <span>email: </span>
+                    <input class="email long" placeholder="example@gmail.com">
+                </div>
+
+                <div class="form-row">
+                    <span>address: </span>
+                    <input class="address long" placeholder="address">
+                    <span>city: </span>
+                    <input class="address short" placeholder="city">
+                    <span>state: </span>
+                    <input class="state" placeholder="XX">
+                    <span>zipcode: </span>
+                    <input class="zip" placeholder="XXXXX">
+                </div>
+            </section>
+
+            <h3 class="sub-form-title">emergency contact</h3>
+            <section class="items emergency">
+                <div class="form-row">
+                    <span>name: </span>
+                    <input class="full-name long" placeholder="full name">
+                    <span>phone number: </span>
+                    <input class="phone-number" placeholder="XXX">
+                    <input class="phone-number" placeholder="XXX">
+                    <input class="phone-number long" placeholder="XXXX">
+                    <span>relationship: </span>
+                    <input class="relationship short" placeholder="">
+                </div>
+            </section>
+
+            <h3 class="sub-form-title">extra info</h3>
+            <section class="items">
+                <div class="form-row">
+                    <span>allergy info: </span>
+                    <textarea class="allergy-info"></textarea>
+                    <span>special instruction: </span>
+                    <textarea class="special-instruction"></textarea>
+                </div>
+            </section>
+
         </section>
     </footer>
 
