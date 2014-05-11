@@ -2,7 +2,7 @@ $(document).ready(function () {
     $('#month').html('<option>Month</option>' + makeMonths().join(''));
     $('#day').html('<option>Day</option>' + makeOptions(1, 31).join(''));
     $('#year').html('<option>Year</option>' + makeOptions(2000, 2014).join(''));
-    $('#grade').html('<option>Grade</option>' + makeGrades(1, 6).join(''));
+    $('#grade').html('<option>Grade</option><option>K4</option><option>K5</option>' + makeGrades(1, 5).join(''));
 
     phoneNumber('.parent .phone-number')
     phoneNumber('.emergency .phone-number')

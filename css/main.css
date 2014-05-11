@@ -255,6 +255,11 @@ textarea {
     overflow: hidden;
     left: -9%;
     -webkit-animation: ocean 3s infinite;
+    -moz-animation:    ocean 3s infinite;
+    -ms-animation:     ocean 3s infinite;
+    -o-animation:      ocean 3s infinite;
+    animation:         ocean 3s infinite;
+
 }
 
 .water {
