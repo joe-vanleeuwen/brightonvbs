@@ -6,6 +6,8 @@ $(document).ready(function () {
 
     phoneNumber('.parent .phone-number')
     phoneNumber('.emergency .phone-number')
+
+    makeWaves(14)
 })
 
 function makeOptions (start, end) {
@@ -41,3 +43,13 @@ function phoneNumber (klass) {
         clickie(input, [3,3,4][i]);
     })
 }
+
+// make n number of waves
+function makeWaves (n) {
+    var waves = _.map(_.range(n), function (n) {
+        return '<div class="wave" style="left: '+(n * 7)+'%"></div>'
+    }).join('');
+
+    $('.waves').append(waves);
+}
+
