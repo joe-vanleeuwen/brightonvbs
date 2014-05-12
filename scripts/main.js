@@ -68,35 +68,6 @@ function submit () {
     })
 }
 
-// function getInputs () {
-
-//     return {
-//         childFirst:    $('#child .first'),
-//         childLast:     $('#child .last'),
-//         childMonth:    $('#child #month'),
-//         childDay:      $('#child #day'),
-//         childYear:     $('#child #year'),
-//         childGrade:    $('#child #grade'),
-//         parentName:    $('#parent .full-name'),
-//         parentPhone1:  $($('#parent .phone-number')[0]),
-//         parentPhone2:  $($('#parent .phone-number')[1]),
-//         parentPhone3:  $($('#parent .phone-number')[2]),
-//         parentEmail:   $('#parent .email'),
-//         parentAddress: $('#parent .address'),
-//         parentCity:    $('#parent .city'),
-//         parentState:   $('#parent .state'),
-//         parentZipcode: $('#parent .zip'),
-//         emergencyName:    $('#emergency .full-name'),
-//         emergencyPhone1:  $($('#emergency .phone-number')[0]),
-//         emergencyPhone2:  $($('#emergency .phone-number')[1]),
-//         emergencyPhone3:  $($('#emergency .phone-number')[2]),
-//         emergencyRelationship: $('#emergency .relationship'),
-//         infoAllergy:           $('#notes .allergy-info'),
-//         infoExtra:             $('#notes .special-instruction')
-//     }
-// }
-
-
 function getInputs () {
 
     return [
@@ -126,11 +97,12 @@ function getInputs () {
 }
 
 function phoneValidation (inputs) {
-    return _.filter(inputs, function (input, i) { return (i < 2 ? input[0].val().length !== 3 : input[0].val().length !== 4)});
+    return _.filter(inputs, function (input, i) { return ((i < 2 ? input[0].val().length !== 3 : input[0].val().length !== 4) || !/^\d+$/.test(input[0].val())) });
 }
 
-function comparotor (input, l) {
-    return input[0].val().length === l ? [] : [input];
+function comparotor (input, l, re) {
+    // return input[0].val().length === l ? [] : [input];
+    return input[0].val().length === l ? [] : !re.test(input[0].val()) ? [input] : [];
 }
 
 function validate (inputs) {
@@ -143,40 +115,20 @@ function validate (inputs) {
     // get address info
     var state = _.find(inputs, function (input) { return input[0].hasClass('state') });
     var zip   = _.find(inputs, function (input) { return input[0].hasClass('zip') });
-
-    var otherInputs = _.filter(_.difference(inputs, phoneNumbers, [state, zip]), function (input) { return input[0].prop('tagName') !== 'TEXTAREA' });
-    var what = _.filter(otherInputs, function (input) { return  })
-    
+    // get the rest of the inputs
+    var otherInputs = _.filter(_.difference(inputs, phoneNumbers, [state, zip]), function (input) { return input[0].prop('tagName') !== 'TEXTAREA' });    
 
     // process all inputs
-    errors = errors.concat(comparotor(state, 2));
-    errors = errors.concat(comparotor(zip,   5));
+    errors = errors.concat(comparotor(state, 2, /^[a-zA-Z]+$/));
+    errors = errors.concat(comparotor(zip,   5, /^\d+$/));
     errors = errors.concat(phoneValidation(parentNumbers));
     errors = errors.concat(phoneValidation(emergencyNumbers));
+    // errors = errors.concat(_.filter(otherInputs, function (input) { return !input[0].val().length }));
 
     return _.uniq(_.map(errors, function (input) { return input[1]}))
 
 }
 
-
-// function checkLength (inputs) {
-//     return _.map(_.filter(inputs, function (input) { return !input[0].hasClass('allergy-info') && !input[0].hasClass('special-instruction') && !input[0].hasClass('phone-number') && !input[0].val().length }), function (input) { return input[1]});
-// }
-
-// function checkLength (inputs) {
-//     return _.filter(inputs, function (input) { return !input.hasClass('allergy-info') && !input.hasClass('special-instruction') && !input.hasClass('phone-number') && !input.val().length });
-// }
-
-// function checkLength (inputs) {
-//     return _.filter(_.filter(inputs, function (input) { return !input.hasClass('allergy-info') && !input.hasClass('special-instruction') && !input.hasClass('phone-number') }), function (input) { console.log(input.val()); return (input.val() && !input.val().length) });
-// }
-
-// function checkLength (inputs) {
-//     return _.chain(inputs)
-//         .filter(function (input) { console.log(input.val()); return input.attr('id') !== 'info' && !input.hasClass('phone-number') })
-//         .filter(function (input) { console.log(input); console.log(input.val()); return input.val().length >= 2 })
-//         .value();
-// }
 
 
 
