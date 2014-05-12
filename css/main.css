@@ -85,7 +85,7 @@ h1.medium {
 h3 {
     font-size: 4em;
     margin-bottom: .5em;
-    text-align: center;
+    /*text-align: center;*/
     font-weight: 400;
     padding: 0 0 .5em;
     margin: 0;
@@ -93,7 +93,7 @@ h3 {
 }
 
 .symbols {
-    margin-bottom: 5em;
+    margin-bottom: 10em;
 }
 
 .symbol-title {
@@ -140,7 +140,7 @@ hr {
 
 footer {
     background: #152937;
-    /*background: #002B42;*/
+    padding-bottom: 10em;
 }
 
 footer h1 {
@@ -150,41 +150,13 @@ footer h1 {
 
 .form {
     color: #FFF;
-    width: 96em;
+    width: 80em;
     margin: 0 auto;
-    padding-bottom: 2em;
+    position: relative;
 }
 
 .form span {
     font-size: 2em;
-}
-
-.items {
-    border: .5em solid #4A8BBC;
-    display: inline-block;
-    padding: 1em;
-    border-radius: 4px;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    color: #FFF;
-    margin: 0 auto 5em;
-}
-
-.items .form-row {
-    margin-bottom: 2.5em;
-}
-
-.items .form-row:last-child {
-    margin-bottom: 0;
-}
-
-.form-row span {
-    margin-right: .2em;
-    margin-left: 2.5em;
-}
-
-.form-row span:first-child {
-    margin-left: 0;
 }
 
 .form input, .form textarea {
@@ -235,7 +207,8 @@ input.state {
 
 textarea {
     vertical-align: top;
-    width: 10em;
+    width: 22em;
+    resize: vertical;
 }
 
 /* WAVES */
@@ -349,6 +322,77 @@ textarea {
         -o-transform:      translate(1.5em, .2em);
         transform:         translate(1.5em, .2em);
     }
+}
+
+.rbc-logo {
+    width: 20em;
+    margin: 0 auto;
+    display: block;
+}
+
+/* TABLE */
+
+table {
+    border-collapse: collapse;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 5em;
+}
+
+.last-table {
+    /*margin-bottom: 0;*/
+}
+
+th {
+    font-size: 4em;
+    margin-bottom: .5em;
+    font-weight: 400;
+    padding: 0 0 .5em;
+    margin: 0;
+    text-align: left;
+}
+
+td {
+    padding: 10px 10px 0 0;
+}
+
+tr:first-child td {
+    border-top: 3px solid #4A8BBC;
+    padding-top: 15px;
+}
+
+td:first-child { 
+    font-size: 2em;
+    text-align: right;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.submit {
+    height: 2em;
+    width: 4em;
+    text-align: center;
+    border-radius: 4px;
+    line-height: 2em;
+    font-size: 3em;
+    background: #4A8BBC;
+/*    position: absolute;
+    bottom: 0;
+    right: 0;*/
+    cursor: pointer;
+    /*display: block;*/
+    float: right;
+    clear: both;
+}
+
+.submit:hover {
+    background: #3A698C;
 }
 
 /**

@@ -1,13 +1,18 @@
-$(document).ready(function () {
-    $('#month').html('<option>Month</option>' + makeMonths().join(''));
-    $('#day').html('<option>Day</option>' + makeOptions(1, 31).join(''));
-    $('#year').html('<option>Year</option>' + makeOptions(2000, 2014).join(''));
-    $('#grade').html('<option>Grade</option><option>K4</option><option>K5</option>' + makeGrades(1, 5).join(''));
+// initialize me some parse
+Parse.initialize("9m9WLThdwXddNxxOHpYCyM67vIfHeVV5slrWjSM9", "noniAGaV8VRq8riDKfGI732nEBIVPgq8qK8SkaNg");
 
-    phoneNumber('.parent .phone-number')
-    phoneNumber('.emergency .phone-number')
+$(document).ready(function () {
+    $('#month').html('<option value="">Month</option>' + makeMonths().join(''));
+    $('#day').html('<option value="">Day</option>' + makeOptions(1, 31).join(''));
+    $('#year').html('<option value="">Year</option>' + makeOptions(2000, 2014).join(''));
+    $('#grade').html('<option value="">Grade</option><option value="K4">K4</option><option value="K5">K5</option>' + makeGrades(1, 5).join(''));
+
+    phoneNumber('.parent-phone .phone-number')
+    phoneNumber('.emergency-phone .phone-number')
 
     makeWaves(14)
+    var inputs = getInputs();
+    console.log(validate(inputs))
 })
 
 function makeOptions (start, end) {
@@ -15,11 +20,11 @@ function makeOptions (start, end) {
 }
 
 function makeMonths () {
-    return _.map(_.range(0, 12), function (n) { return '<option>'+['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][n]+'</option>'})
+    return _.map(_.range(0, 12), function (n) { var str = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][n]; return '<option value="'+str+'">'+str+'</option>'})
 }
 
 function makeGrades (start, end) {
-    return _.map(_.range(start, end + 1), function (n) { return '<option>'+n+(['st', 'nd', 'rd'][n - 1] || 'th')+'</option>'})
+    return _.map(_.range(start, end + 1), function (n) { var str = n+(['st', 'nd', 'rd'][n - 1] || 'th'); return '<option value="'+str+'">'+str+'</option>'})
 }
 
 function clickie (input, n) {
@@ -52,4 +57,127 @@ function makeWaves (n) {
 
     $('.waves').append(waves);
 }
+
+function submit () {
+    $('.submit').click(function () {
+        console.log('yo we be savin');
+        var Applicant = Parse.Object.extend('Applicant');
+        var applicant = new Applicant(
+            // put function here/validate
+        ).save();
+    })
+}
+
+// function getInputs () {
+
+//     return {
+//         childFirst:    $('#child .first'),
+//         childLast:     $('#child .last'),
+//         childMonth:    $('#child #month'),
+//         childDay:      $('#child #day'),
+//         childYear:     $('#child #year'),
+//         childGrade:    $('#child #grade'),
+//         parentName:    $('#parent .full-name'),
+//         parentPhone1:  $($('#parent .phone-number')[0]),
+//         parentPhone2:  $($('#parent .phone-number')[1]),
+//         parentPhone3:  $($('#parent .phone-number')[2]),
+//         parentEmail:   $('#parent .email'),
+//         parentAddress: $('#parent .address'),
+//         parentCity:    $('#parent .city'),
+//         parentState:   $('#parent .state'),
+//         parentZipcode: $('#parent .zip'),
+//         emergencyName:    $('#emergency .full-name'),
+//         emergencyPhone1:  $($('#emergency .phone-number')[0]),
+//         emergencyPhone2:  $($('#emergency .phone-number')[1]),
+//         emergencyPhone3:  $($('#emergency .phone-number')[2]),
+//         emergencyRelationship: $('#emergency .relationship'),
+//         infoAllergy:           $('#notes .allergy-info'),
+//         infoExtra:             $('#notes .special-instruction')
+//     }
+// }
+
+
+function getInputs () {
+
+    return [
+        [ $('#child .first'),                  'child\'s first name'    ],
+        [ $('#child .last'),                   'child\'s last name'     ],
+        [ $('#child #month'),                  'child\'s month of birth'],
+        [ $('#child #day'),                    'child\'s day of birth'  ],
+        [ $('#child #year'),                   'child\'s year of birth' ],
+        [ $('#child #grade'),                  'child\'s grade'         ],
+        [ $('#parent .full-name'),             'parent\'s name'   ],
+        [ $($('#parent .phone-number')[0]),    'parent\'s phone number'],
+        [ $($('#parent .phone-number')[1]),    'parent\'s phone number'],
+        [ $($('#parent .phone-number')[2]),    'parent\'s phone number'],
+        [ $('#parent .email'),                 'parent\'s email'],
+        [ $('#parent .address'),               'address'],
+        [ $('#parent .city'),                  'city'],
+        [ $('#parent .state'),                 'state'],
+        [ $('#parent .zip'),                   'zipcode'],
+        [ $('#emergency .full-name'),          'emergency contact\'s name'],
+        [ $($('#emergency .phone-number')[0]), 'emergency contact\'s phone number'],
+        [ $($('#emergency .phone-number')[1]), 'emergency contact\'s phone number'],
+        [ $($('#emergency .phone-number')[2]), 'emergency contact\'s phone number'],
+        [ $('#emergency .relationship'),       'emergency contact\'s relationship'],
+        [ $('#notes .allergy-info')],
+        [ $('#notes .special-instruction')]
+    ]
+}
+
+function phoneValidation (inputs) {
+    return _.filter(inputs, function (input, i) { return (i < 2 ? input[0].val().length !== 3 : input[0].val().length !== 4)});
+}
+
+function comparotor (input, l) {
+    return input[0].val().length === l ? [] : [input];
+}
+
+function validate (inputs) {
+    var errors = [];
+
+    // get phone numbers
+    var phoneNumbers     = _.filter(inputs, function (input) { return input[0].hasClass('phone-number') })
+    var parentNumbers    = _.filter(phoneNumbers, function (input) { return input[1].slice(0,1) === 'p' })
+    var emergencyNumbers = _.filter(phoneNumbers, function (input) { return input[1].slice(0,1) === 'e' })
+    // get address info
+    var state = _.find(inputs, function (input) { return input[0].hasClass('state') });
+    var zip   = _.find(inputs, function (input) { return input[0].hasClass('zip') });
+
+    var otherInputs = _.filter(_.difference(inputs, phoneNumbers, [state, zip]), function (input) { return input[0].prop('tagName') !== 'TEXTAREA' });
+    var what = _.filter(otherInputs, function (input) { return  })
+    
+
+    // process all inputs
+    errors = errors.concat(comparotor(state, 2));
+    errors = errors.concat(comparotor(zip,   5));
+    errors = errors.concat(phoneValidation(parentNumbers));
+    errors = errors.concat(phoneValidation(emergencyNumbers));
+
+    return _.uniq(_.map(errors, function (input) { return input[1]}))
+
+}
+
+
+// function checkLength (inputs) {
+//     return _.map(_.filter(inputs, function (input) { return !input[0].hasClass('allergy-info') && !input[0].hasClass('special-instruction') && !input[0].hasClass('phone-number') && !input[0].val().length }), function (input) { return input[1]});
+// }
+
+// function checkLength (inputs) {
+//     return _.filter(inputs, function (input) { return !input.hasClass('allergy-info') && !input.hasClass('special-instruction') && !input.hasClass('phone-number') && !input.val().length });
+// }
+
+// function checkLength (inputs) {
+//     return _.filter(_.filter(inputs, function (input) { return !input.hasClass('allergy-info') && !input.hasClass('special-instruction') && !input.hasClass('phone-number') }), function (input) { console.log(input.val()); return (input.val() && !input.val().length) });
+// }
+
+// function checkLength (inputs) {
+//     return _.chain(inputs)
+//         .filter(function (input) { console.log(input.val()); return input.attr('id') !== 'info' && !input.hasClass('phone-number') })
+//         .filter(function (input) { console.log(input); console.log(input.val()); return input.val().length >= 2 })
+//         .value();
+// }
+
+
+
 

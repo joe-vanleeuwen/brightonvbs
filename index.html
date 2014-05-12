@@ -5,8 +5,7 @@
     <title>Redeemer VBS</title>
 
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,300italic' rel='stylesheet' type='text/css'><body>
+    <script src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
 
 <!--     <header>
         <div class="header_text_medium">
@@ -66,85 +65,160 @@
             </div>
 
         </section>
+
+        <img class="rbc-logo" src="images/RBC-Logo-Final.jpg"></img>
     </div>
 
     <div class="waves-container">
         <div class="waves"></div>
-        <!-- <div class="water"></div> -->
     </div>
 
     <footer class="sign-up">
-
-
         <h1 class="big">Sign Up</h1>
-        <!-- <hr> -->
-        <section class="form">
-            <h3 class="sub-form-title">child</h3>
-            <section class="items">
-                <div class="form-row">
-                    <span>name: </span>
-                    <input class="half-name short" placeholder="first">
-                    <input class="half-name short" placeholder="last">
-                    <span>date of Birth: </span>
-                    <select id="month"></select>
-                    <select id="day"></select>
-                    <select id="year"></select>
-                    <span>grade: </span>
-                    <select id="grade"></select>
-                </div>
-            </section>
 
-            <h3 class="sub-form-title">parent</h3>
-            <section class="items parent">
-                <div class="form-row">
-                    <span>name: </span>
-                    <input class="full-name long" placeholder="full name">
-                    <span>phone number: </span>
-                    <input class="phone-number" placeholder="XXX">
-                    <input class="phone-number" placeholder="XXX">
-                    <input class="phone-number long" placeholder="XXXX">
-                    <span>email: </span>
-                    <input class="email long" placeholder="example@gmail.com">
-                </div>
+        <section class="form cf">
+            <table class="left" id="child">
+                <thead>
+                    <tr>
+                        <th colspan="2">1. child</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>name:</td>
+                        <td>
+                            <input class="half-name first short" placeholder="first">
+                            <input class="half-name last short" placeholder="last">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>date of birth:</td>
+                        <td>
+                            <select id="month"></select>
+                            <select id="day"></select>
+                            <select id="year"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>grade:</td>
+                        <td>
+                            <select id="grade"></select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-                <div class="form-row">
-                    <span>address: </span>
-                    <input class="address long" placeholder="address">
-                    <span>city: </span>
-                    <input class="address short" placeholder="city">
-                    <span>state: </span>
-                    <input class="state" placeholder="XX">
-                    <span>zipcode: </span>
-                    <input class="zip" placeholder="XXXXX">
-                </div>
-            </section>
+            <table class="right" id="parent">
+                <thead>
+                    <tr>
+                        <th colspan="2">2. parent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>name:</td>
+                        <td>
+                            <input class="full-name long" placeholder="full name">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>phone number:</td>
+                        <td class="parent-phone">
+                            <input class="phone-number" placeholder="XXX">
+                            <input class="phone-number" placeholder="XXX">
+                            <input class="phone-number long" placeholder="XXXX">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>email:</td>
+                        <td>
+                            <input class="email long" placeholder="example@gmail.com">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>address:</td>
+                        <td>
+                            <input class="address long" placeholder="address">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>city:</td>
+                        <td>
+                            <input class="city short" placeholder="city">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>state:</td>
+                        <td>
+                            <input class="state" placeholder="XX">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>zipcode:</td>
+                        <td>
+                            <input class="zip" placeholder="XXXXX">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-            <h3 class="sub-form-title">emergency contact</h3>
-            <section class="items emergency">
-                <div class="form-row">
-                    <span>name: </span>
-                    <input class="full-name long" placeholder="full name">
-                    <span>phone number: </span>
-                    <input class="phone-number" placeholder="XXX">
-                    <input class="phone-number" placeholder="XXX">
-                    <input class="phone-number long" placeholder="XXXX">
-                    <span>relationship: </span>
-                    <input class="relationship short" placeholder="">
-                </div>
-            </section>
+            <table class="left" id="emergency">
+                <thead>
+                    <tr>
+                        <th colspan="2">3. emergency contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>name:</td>
+                        <td>
+                            <input class="full-name long" placeholder="full name">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>phone number:</td>
+                        <td class="emergency-phone">
+                            <input class="phone-number" placeholder="XXX">
+                            <input class="phone-number" placeholder="XXX">
+                            <input class="phone-number long" placeholder="XXXX">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>relationship:</td>
+                        <td>
+                            <input class="relationship short" placeholder="">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-            <h3 class="sub-form-title">extra info</h3>
-            <section class="items">
-                <div class="form-row">
-                    <span>allergy info: </span>
-                    <textarea class="allergy-info"></textarea>
-                    <span>special instruction: </span>
-                    <textarea class="special-instruction"></textarea>
-                </div>
-            </section>
+            <table class="left last-table" id="notes">
+                <thead>
+                    <tr>
+                        <th colspan="2">4. notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>allergy info:</td>
+                        <td>
+                            <textarea class="allergy-info"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>special instruction:</td>
+                        <td>
+                            <textarea class="special-instruction"></textarea>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
+            <div class="submit">submit</div>
         </section>
     </footer>
+
+    
 
 <!--    Registration info
         Child's Last Name, Child's First Name
