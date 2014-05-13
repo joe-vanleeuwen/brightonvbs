@@ -2,17 +2,23 @@
 Parse.initialize("9m9WLThdwXddNxxOHpYCyM67vIfHeVV5slrWjSM9", "noniAGaV8VRq8riDKfGI732nEBIVPgq8qK8SkaNg");
 
 $(document).ready(function () {
-    $('#month').html('<option value="">Month</option>' + makeMonths().join(''));
-    $('#day').html('<option value="">Day</option>' + makeOptions(1, 31).join(''));
-    $('#year').html('<option value="">Year</option>' + makeOptions(2000, 2014).join(''));
-    $('#grade').html('<option value="">Grade</option><option value="K4">K4</option><option value="K5">K5</option>' + makeGrades(1, 5).join(''));
-
+    // create optiosn for selects
+    $('#month').html('<option value="">month</option>' + makeMonths().join(''));
+    $('#day').html('<option value="">day</option>' + makeOptions(1, 31).join(''));
+    $('#year').html('<option value="">year</option>' + makeOptions(2000, 2014).join(''));
+    $('#grade').html('<option value="">grade</option><option value="K4">K4</option><option value="K5">K5</option>' + makeGrades(1, 5).join(''));
+    // keyup events
     phoneNumber('.parent-phone .phone-number')
     phoneNumber('.emergency-phone .phone-number')
-
+    // make them waves
     makeWaves(14)
-    var inputs = getInputs();
-    console.log(validate(inputs))
+    // click events
+    ok();
+    notModal();
+    modalOff();
+    submit();
+    admin();
+    login();
 })
 
 function makeOptions (start, end) {
@@ -20,7 +26,7 @@ function makeOptions (start, end) {
 }
 
 function makeMonths () {
-    return _.map(_.range(0, 12), function (n) { var str = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][n]; return '<option value="'+str+'">'+str+'</option>'})
+    return _.map(_.range(0, 12), function (n) { return '<option value="'+n+'">'+['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][n]+'</option>'})
 }
 
 function makeGrades (start, end) {
@@ -33,10 +39,6 @@ function clickie (input, n) {
         if ($.isNumeric($(this).val())) {
             // focus on next input
             if ($(this).val().length >= n) $(this).next(input).focus();
-        // val is not numeric
-        } else {
-            // characters exist in input
-            $(this).css('background', $(this).val().length ? 'rgba(255, 0, 0, 0.35)' : 'white');
         }
     });
 }
@@ -58,77 +60,270 @@ function makeWaves (n) {
     $('.waves').append(waves);
 }
 
-function submit () {
-    $('.submit').click(function () {
-        console.log('yo we be savin');
-        var Applicant = Parse.Object.extend('Applicant');
-        var applicant = new Applicant(
-            // put function here/validate
-        ).save();
-    })
-}
-
 function getInputs () {
 
     return [
-        [ $('#child .first'),                  'child\'s first name'    ],
-        [ $('#child .last'),                   'child\'s last name'     ],
-        [ $('#child #month'),                  'child\'s month of birth'],
-        [ $('#child #day'),                    'child\'s day of birth'  ],
-        [ $('#child #year'),                   'child\'s year of birth' ],
-        [ $('#child #grade'),                  'child\'s grade'         ],
-        [ $('#parent .full-name'),             'parent\'s name'   ],
-        [ $($('#parent .phone-number')[0]),    'parent\'s phone number'],
-        [ $($('#parent .phone-number')[1]),    'parent\'s phone number'],
-        [ $($('#parent .phone-number')[2]),    'parent\'s phone number'],
-        [ $('#parent .email'),                 'parent\'s email'],
-        [ $('#parent .address'),               'address'],
-        [ $('#parent .city'),                  'city'],
-        [ $('#parent .state'),                 'state'],
-        [ $('#parent .zip'),                   'zipcode'],
-        [ $('#emergency .full-name'),          'emergency contact\'s name'],
-        [ $($('#emergency .phone-number')[0]), 'emergency contact\'s phone number'],
-        [ $($('#emergency .phone-number')[1]), 'emergency contact\'s phone number'],
-        [ $($('#emergency .phone-number')[2]), 'emergency contact\'s phone number'],
-        [ $('#emergency .relationship'),       'emergency contact\'s relationship'],
-        [ $('#notes .allergy-info')],
-        [ $('#notes .special-instruction')]
+        {
+            el:     $('#child .first'),
+            error:  'child\'s first name',
+            prop:   'childFirstName'
+        },
+        {
+            el:    $('#child .last'),
+            error: 'child\'s last name',
+            prop:  'childLastName'
+        },
+        {
+            el:    $('#child #year'),
+            error: 'child\'s year of birth'
+        },
+        {
+            el:    $('#child #month'),
+            error: 'child\'s month of birth'
+        },
+        {
+            el:    $('#child #day'),
+            error: 'child\'s day of birth'
+        },
+        {
+            el:    $('#child #grade'),
+            error: 'child\'s grade',
+            prop:  'childGrade'
+        },
+        {
+            el:    $('#parent .full-name'),
+            error: 'parent\'s name',
+            prop:  'parentName'
+        },
+        {
+            el:    $($('#parent .phone-number')[0]),
+            error: 'parent\'s phone number'
+        },
+        {
+            el:    $($('#parent .phone-number')[1]),
+            error: 'parent\'s phone number',
+        },
+        {
+            el:    $($('#parent .phone-number')[2]),
+            error: 'parent\'s phone number',
+        },
+        {
+            el:    $('#parent .email'),
+            error: 'parent\'s email',
+            prop:  'email'
+        },
+        {
+            el:    $('#parent .address'),
+            error: 'address',
+            prop:  'address'
+        },
+        {
+            el:    $('#parent .city'),
+            error: 'city',
+            prop:  'city'
+        },
+        {
+            el:    $('#parent .state'),
+            error: 'state',
+            prop:  'state'
+        },
+        {
+            el:    $('#parent .zip'),
+            error: 'zipcode',
+            prop:  'zipcode'
+        },
+        {
+            el:    $('#emergency .full-name'),
+            error: 'emergency contact\'s name',
+            prop:  'emergencyName'
+        },
+        {
+            el:    $($('#emergency .phone-number')[0]),
+            error: 'emergency contact\'s phone number'
+        },
+        {
+            el:    $($('#emergency .phone-number')[1]),
+            error: 'emergency contact\'s phone number'
+        },
+        {
+            el:    $($('#emergency .phone-number')[2]),
+            error: 'emergency contact\'s phone number'
+        },
+        {
+            el:    $('#emergency .relationship'),
+            error: 'emergency contact\'s relationship',
+            prop:  'emergencyRelationship'
+        },
+        {
+            el:    $('#notes .allergy-info'),
+            prop:  'allergyInfo'
+        },
+        {
+            el:    $('#notes .special-instruction'),
+            prop:  'specialInstruction'
+        }
     ]
 }
 
+// for validating phone
 function phoneValidation (inputs) {
-    return _.filter(inputs, function (input, i) { return ((i < 2 ? input[0].val().length !== 3 : input[0].val().length !== 4) || !/^\d+$/.test(input[0].val())) });
+    return _.filter(inputs, function (input, i) { return ((i < 2 ? input.el.val().length !== 3 : input.el.val().length !== 4) || !/^\d+$/.test(input.el.val())) });
 }
 
+// for validating state and zip
 function comparotor (input, l, re) {
-    // return input[0].val().length === l ? [] : [input];
-    return input[0].val().length === l ? [] : !re.test(input[0].val()) ? [input] : [];
+    return input.el.val().length !== l ? [input] : !re.test(input.el.val()) ? [input] : [];
 }
 
+// for validating inputs
 function validate (inputs) {
     var errors = [];
 
     // get phone numbers
-    var phoneNumbers     = _.filter(inputs, function (input) { return input[0].hasClass('phone-number') })
-    var parentNumbers    = _.filter(phoneNumbers, function (input) { return input[1].slice(0,1) === 'p' })
-    var emergencyNumbers = _.filter(phoneNumbers, function (input) { return input[1].slice(0,1) === 'e' })
+    var phoneNumbers     = _.filter(inputs, function (input) { return input.el.hasClass('phone-number') })
+    var parentNumbers    = _.filter(phoneNumbers, function (input) { return input.error.slice(0,1) === 'p' })
+    var emergencyNumbers = _.filter(phoneNumbers, function (input) { return input.error.slice(0,1) === 'e' })
     // get address info
-    var state = _.find(inputs, function (input) { return input[0].hasClass('state') });
-    var zip   = _.find(inputs, function (input) { return input[0].hasClass('zip') });
+    var state = _.find(inputs, function (input) { return input.el.hasClass('state') });
+    var zip   = _.find(inputs, function (input) { return input.el.hasClass('zip') });
     // get the rest of the inputs
-    var otherInputs = _.filter(_.difference(inputs, phoneNumbers, [state, zip]), function (input) { return input[0].prop('tagName') !== 'TEXTAREA' });    
+    var otherInputs = _.filter(_.difference(inputs, phoneNumbers, [state, zip]), function (input) { return input.el.prop('tagName') !== 'TEXTAREA' });    
 
     // process all inputs
+    errors = errors.concat(_.filter(otherInputs, function (input) { return !input.el.val().length }));
     errors = errors.concat(comparotor(state, 2, /^[a-zA-Z]+$/));
     errors = errors.concat(comparotor(zip,   5, /^\d+$/));
     errors = errors.concat(phoneValidation(parentNumbers));
     errors = errors.concat(phoneValidation(emergencyNumbers));
-    // errors = errors.concat(_.filter(otherInputs, function (input) { return !input[0].val().length }));
 
-    return _.uniq(_.map(errors, function (input) { return input[1]}))
-
+    return _.uniq(_.map(errors, function (input) { return input.error}))
 }
 
+// for displaying errors
+function displayErrors (errors) {
+    $('#error').css({
+        opacity:   1,
+        'z-index': 100
+    });
+
+    $('#errors').html(_.map(errors, function (error) { return '<li>'+error+'</li>' }).join(''));
+}
+
+// for displaying errors
+function displaySuccess () {
+    $('#success').css({
+        opacity:   1,
+        'z-index': 100
+    });
+}
+
+function process (inputs) {
+    var attributes = {};
+
+    var withProps      = _.filter(inputs, function (input) { return input.prop });
+    var withoutProps   = _.filter(inputs, function (input) { return !input.prop });
+    var birthDay       = _.map(_.filter(withoutProps, function (input) { return input.error.slice(0,1) === 'c' }), function (input) { return parseInt(input.el.val()) });
+    var parentPhone    = _.map(_.filter(withoutProps, function (input) { return input.error.slice(0,1) === 'p' }), function (input) { return input.el.val()});
+    var emergencyPhone = _.map(_.filter(withoutProps, function (input) { return input.error.slice(0,1) === 'e' }), function (input) { return input.el.val()});
+    _.each(withProps, function (input) { attributes[input.prop] = input.el.val(); });
+
+    attributes.childBirthday  = new Date(birthDay[0], birthDay[1], birthDay[2]);
+    attributes.parentPhone    = '('+parentPhone[0]+') '   +parentPhone[1]   +'-'+parentPhone[2];
+    attributes.emergencyPhone = '('+emergencyPhone[0]+') '+emergencyPhone[1]+'-'+emergencyPhone[2];
+    
+    return attributes;
+}
+ 
+// for submitting applicant
+function submit () {
+    $('.submit').click(function () {
+        var errors = validate(getInputs());
+
+        if (errors.length) return displayErrors(errors);
+
+        displaySuccess();
+        var Applicant = Parse.Object.extend('Applicant');
+        var applicant = new Applicant(process(getInputs())).save();
+    })
+}
+
+// for removing modals
+function ok () {
+    $('.ok').click(function () {
+        $('.modal').css({
+            opacity:   0,
+            'z-index': -1
+        })
+    })
+}
+
+// no bubble click event when clicking modal
+function notModal () {
+    $('.modal-box').click(function(event){
+        event.stopPropagation();
+    });
+}
+
+// for removing modals
+function modalOff () {
+    $('.modal').click(function () {
+        $('.modal').css({
+            opacity:   0,
+            'z-index': -1
+        })
+    })
+}
+
+// login for admin
+function admin () {
+    $('.nav').click(function () {
+        $('.login-error').css('opacity', 0);
+        $('.login-partial input').val('')
+        $('.login').css('opacity', Math.abs(parseInt($('.login').css('opacity')) -1 ));
+    }) 
+}
+
+// keyup enter for login
+function login () {
+    $('.login-partial input').keyup(function (e) {
+        var username = $($('.login-partial input')[0]).val();
+        var password = $($('.login-partial input')[1]).val();
+        if (e.which === 13) {
+            Parse.User.logIn(username, password, {
+                success: function (user) {
+                    $('.nav').click();
+                    console.log(user, 'logged in')
+                },
+                error: function (error) {
+                    $($('.login-partial input')[1]).val('');
+                    $('.login-error').css('opacity', 1);
+                }
+            })
+        }
+    })
+}
+
+function autoFill () {
+    var lorem = 'Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum'.split(' ');
+    // get inputs
+    var inputs = getInputs();
+    // get phone numbers
+    var phoneNumbers = _.filter(inputs, function (input) { return input.el.hasClass('phone-number') });
+    _.each(phoneNumbers, function (input, i) { input.el.val(_.map(_.range((i%3 < 2 ? 3 : 4)), function () { return _.random(1,9) }).join('')) });
+    // get address info
+    var state = _.find(inputs, function (input) { return input.el.hasClass('state') });
+    var zip   = _.find(inputs, function (input) { return input.el.hasClass('zip') });
+
+    state.el.val('abcdefg'[_.random(6)]+'abcdefg'[_.random(6)])
+    zip.el.val(_.map(_.range(5), function () { return _.random(9) }).join(''))
+
+        // // get the rest of the inputs
+    var otherInputs = _.filter(_.difference(inputs, phoneNumbers, [state, zip]), function (input) { return input.el.prop('tagName') !== 'SELECT' });
+    _.each(otherInputs, function (input) { input.el.val(lorem[_.random(lorem.length - 1)])})
+
+    var selects = _.filter(inputs, function (input) { return input.el.prop('tagName') === 'SELECT' });
+    _.each(selects, function (select) { select.el.prop('selectedIndex', _.random(1, select.el.children('option').length - 1)) })
+}
 
 
 

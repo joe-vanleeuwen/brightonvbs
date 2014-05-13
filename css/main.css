@@ -3,17 +3,24 @@
     src: url('../fonts/Mission Gothic Thin.otf');
 }
 
+@font-face {
+    font-family: 'Mission Gothic Bold';
+    src: url('../fonts/Mission Gothic Bold.otf');
+}
+
 body {
     font-size: 62.5%;
     margin: 0;
     /*font-family: 'Poiret One', cursive;*/
     font-family: 'Mission Gothic Thin', sans-serif;
+    position: relative;
 }
 
-/** {
-    vertical-align: top;
+select {
+    height: 2em;
+    font-size: 1.6em;
 }
-*/
+
 .wrapper {
     width: 96em;
     margin: 0 auto;
@@ -49,6 +56,51 @@ header {
     -o-background-size: cover;
     background-size: cover;
     position: relative;
+}
+
+.admin {
+    width: 120em;
+    text-align: right;
+    margin: -4em auto 0;
+    position: relative;
+    z-index: 20;
+    cursor: default;
+}
+
+.nav {
+    font-size: 2em;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.login {
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 3em;
+}
+
+.login-partial {
+    display: block;
+}
+
+.login-partial span {
+    font-size: 2em;
+    margin-right: 0.2em;
+}
+
+.login-partial input {
+    font-size: 1.5em;
+    padding: .2em .5em;
+    width: 7em;
+    margin-bottom: 0.2em;
+}
+
+.login-error {
+    color: #F00;
+    font-size: 1.5em;
+    opacity: 0;
 }
 
 h1 {
@@ -381,25 +433,85 @@ td:first-child {
     float: right;
 }
 
-.submit {
+.button{
     height: 2em;
     width: 4em;
     text-align: center;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
     border-radius: 4px;
     line-height: 2em;
     font-size: 3em;
     background: #4A8BBC;
-/*    position: absolute;
-    bottom: 0;
-    right: 0;*/
     cursor: pointer;
-    /*display: block;*/
     float: right;
     clear: both;
 }
 
-.submit:hover {
+.button:hover {
     background: #3A698C;
+}
+
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0, .5);
+    z-index: -1;
+    opacity: 0;
+}
+
+.modal-box-container {
+    width: 100%;
+    margin-top: 5em;
+    position: fixed;
+}
+
+.modal-box {
+    width: 50em;
+    padding: 5em;
+    margin: 0 auto;
+    background: #FFF;
+    position: relative;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.modal-box h3 {
+    color: #3EA0E0;
+    padding-bottom: .2em;
+    border-bottom: .1em solid #3EA0E0;
+}
+
+.modal-box h3:first-child {
+    font-family: 'Mission Gothic Bold', sans-serif;
+    border: none;
+}
+
+#success .modal-box h3  {
+    border: none;
+}
+
+.modal-box ol {
+    font-size: 2em;
+}
+
+.ok {
+    color: #FFF;
+/*    height: 2em;
+    width: 4em;
+    text-align: center;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    line-height: 2em;
+    font-size: 3em;
+    background: #4A8BBC;
+    cursor: pointer;
+    float: right;*/
 }
 
 /**

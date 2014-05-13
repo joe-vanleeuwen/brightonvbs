@@ -6,19 +6,45 @@
 
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <script src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+</head>
+<body>
 
-<!--     <header>
-        <div class="header_text_medium">
-            <h1 class="medium">Sailing the Seven C's</h1>
+    <div class="modal" id="error">
+        <div class="modal-box-container">
+            <div class="modal-box cf">
+                <h3>Oops.</h3>
+                <h3>Please check the following:</h3>
+                <ol id="errors"></ol>
+                <div class="ok button">ok</div>
+            </div>
         </div>
+    </div>
 
-        <h1 class="small">the Seven C's of</h1>
-        <div class='header_text_big'>
-            <h1 class="big"><span class="of">of</span> History</h1>
+    <div class="modal" id="success">
+        <div class="modal-box-container">
+            <div class="modal-box cf">
+                <h3>Thank you!</h3>
+                <h3>Your submission was successful. We are excited that you will be joining us!</h3>
+                <div class="ok button">ok</div>
+            </div>
         </div>
-    </header> -->
+    </div>
 
     <header>
+            <div class="admin">
+                <span class="nav">admin</span>
+                <div class="login">
+                    <div class="login-partial">
+                        <span>username</span>
+                        <input></input>
+                    </div>
+                    <div class="login-partial">
+                        <span>password</span>
+                        <input type="password"</input>
+                    </div>
+                    <span class="login-error">email or password incorrect</span>
+                </div>
+            </div>
             <h1 class="medium">Sailing the Seven C's</h1>
 
             <h1 class="big"><span class="of">of</span> History</h1>
@@ -214,24 +240,9 @@
                 </tbody>
             </table>
 
-            <div class="submit">submit</div>
+            <div class="submit button">submit</div>
         </section>
     </footer>
-
-    
-
-<!--    Registration info
-        Child's Last Name, Child's First Name
-        Child's Birthdate, Child's Grade Level
-        Parents Full Name 
-        Parents Cell Phone Number
-        Address, City, State, Zip
-        Email
-        Allergy Infromation
-        Emergency Contact Name, Phone, Relationship
-        Special Instruction
--->
-
 
     <script src="scripts/underscore.js"></script>
     <script src="scripts/jquery.js"></script>
