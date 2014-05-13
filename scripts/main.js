@@ -277,9 +277,13 @@ function modalOff () {
 // login for admin
 function admin () {
     $('.nav').click(function () {
-        $('.login-error').css('opacity', 0);
-        $('.login-partial input').val('')
-        $('.login').css('opacity', Math.abs(parseInt($('.login').css('opacity')) -1 ));
+        if (Parse.User.current()) {
+            window.location = 'admin'
+        } else {
+            $('.login-error').css('opacity', 0);
+            $('.login-partial input').val('')
+            $('.login').css('opacity', Math.abs(parseInt($('.login').css('opacity')) -1 ));
+        }
     }) 
 }
 
@@ -292,7 +296,7 @@ function login () {
             Parse.User.logIn(username, password, {
                 success: function (user) {
                     $('.nav').click();
-                    console.log(user, 'logged in')
+                    console.log(user, 'logged in');
                 },
                 error: function (error) {
                     $($('.login-partial input')[1]).val('');
