@@ -1,5 +1,24 @@
+.logout-nav {
+    display: none;
+}
+
+.logout {
+    font-size: 2em;
+    padding: .5em 1em;
+    display: block;
+    cursor: default;
+}
+
+.unauthorized {
+    text-align: center;
+    margin-top: 10em;
+    font-size: 2em;
+    display: none;
+}
+
 .admin-table {
     border-collapse: collapse;
+    display: none;
 }
 
 .admin-table td, .admin-table th {
@@ -44,4 +63,12 @@
 
 #info-text {
     padding: 0;
+}
+
+#info.modal {
+    background: none;
+}
+
+#info .modal-box {
+    border: 3px solid #000;
 }

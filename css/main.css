@@ -81,6 +81,13 @@ header {
     top: 3em;
 }
 
+.login input {
+    font-size: 1.5em;
+    padding: .2em .5em;
+    width: 7em;
+    margin-bottom: 0.2em;
+}
+
 .login-partial {
     display: block;
 }
@@ -90,17 +97,24 @@ header {
     margin-right: 0.2em;
 }
 
-.login-partial input {
-    font-size: 1.5em;
-    padding: .2em .5em;
-    width: 7em;
-    margin-bottom: 0.2em;
-}
-
 .login-error {
     color: #F00;
     font-size: 1.5em;
-    opacity: 0;
+    display: none;
+}
+
+/* forgot password */
+.forgot-password {
+    color: #FFF;
+    font-size: 1.5em;
+    display: block;
+}
+
+.forgot-password-input {
+    display: none;
+    position: absolute;
+    right: 0px;
+    bottom: -2em;
 }
 
 h1 {
@@ -502,6 +516,8 @@ textarea {
 .ok {
     color: #FFF;
 }
+
+
 
 /**
  * For modern browsers

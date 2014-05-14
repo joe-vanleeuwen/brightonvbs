@@ -28,7 +28,6 @@ var Row = Parse.View.extend({
     },
 
     initialize: function (options) {
-        console.log('hey')
         this.number = options.number
          $('tbody').append(this.$el);
          this.render();
@@ -65,26 +64,33 @@ var Row = Parse.View.extend({
 })
 
 $(document).ready(function () {
-    fetchApplicants();
+    logout();
+    checkUser(fetchApplicants);
 })
+
+function checkUser (fun) {
+    if (Parse.User.current()) return fun();
+    $('.unauthorized').css('display', 'block');
+}
 
 function fetchApplicants () {
     var query = new Parse.Query('Applicant');
     query.find().then(function (applicants) {
-        // $('tbody').html(makeRows(ths, applicants))
-        makeRows(applicants)
-        console.log(applicants[3])
-        console.log(applicants[3].get('infoAllergy'))
-        console.log(applicants[3].get('infoAllergy') == true)
+        $('.admin-table').css('display', 'table');
+        $('.logout-nav').css('display', 'block');
+        makeRows(applicants);
     })
 }
 
-// function makeRows (ths, applicants) {
-//     return _.map(applicants, function (applicant, i) { return '<tr><td>'+(i+1)+'.</td>' + _.map(ths, function (th) { return '<td class="'+ (th[1] || '')+'">'+applicant.get(th[0])+'</td>' }).join('') + '</tr>' }).join('');
-// }
-
 function makeRows (applicants) {
-    _.each(applicants, function (applicant, i) { console.log(applicant); new Row({model: applicant, number: i+1}) })
+    _.each(applicants, function (applicant, i) { new Row({model: applicant, number: i+1}) })
+}
+
+function logout () {
+    $('.logout').click(function () {
+        Parse.User.logOut();
+        window.location = '../';
+    })
 }
 
 

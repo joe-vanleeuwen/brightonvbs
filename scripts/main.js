@@ -19,6 +19,9 @@ $(document).ready(function () {
     submit();
     admin();
     login();
+    forgotPassword();
+    resetPassword();
+
 })
 
 function makeOptions (start, end) {
@@ -281,7 +284,9 @@ function admin () {
         if (Parse.User.current()) {
             window.location = 'admin'
         } else {
-            $('.login-error').css('opacity', 0);
+            $('.login-error').css('display', 'none');
+            $('.forgot-password-input').css('display', 'none');
+            $('.forgot-password-input').attr('placeholder', 'email');
             $('.login-partial input').val('')
             $('.login').css('opacity', Math.abs(parseInt($('.login').css('opacity')) -1 ));
         }
@@ -301,9 +306,37 @@ function login () {
                 },
                 error: function (error) {
                     $($('.login-partial input')[1]).val('');
-                    $('.login-error').css('opacity', 1);
+                    $('.login-error').css('display', 'block');
                 }
             })
+        }
+    })
+}
+
+// for clicking forgot password
+function forgotPassword () {
+    $('.forgot-password').click(function () {
+        $('.forgot-password-input').css('display', 'block');
+    })
+}
+
+// keyup enter for resetting password
+function resetPassword () {
+    $('.forgot-password-input').keyup(function (e) {
+        if (e.which === 13) {
+            var email = $(this).val();
+            var that = $(this);
+
+            Parse.User.requestPasswordReset(email, {
+                success: function() {
+                    that.val('');
+                    that.attr('placeholder', 'check email');
+                },
+                error: function(error) {
+                    that.val('');
+                    that.attr('placeholder', 'not found');
+                }
+            });
         }
     })
 }
