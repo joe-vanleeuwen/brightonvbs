@@ -110,27 +110,27 @@ function getInputs () {
         {
             el:    $('#parent .email'),
             error: 'parent\'s email',
-            prop:  'email'
+            prop:  'parentEmail'
         },
         {
             el:    $('#parent .address'),
             error: 'address',
-            prop:  'address'
+            prop:  'addressStreet'
         },
         {
             el:    $('#parent .city'),
             error: 'city',
-            prop:  'city'
+            prop:  'addressCity'
         },
         {
             el:    $('#parent .state'),
             error: 'state',
-            prop:  'state'
+            prop:  'addressState'
         },
         {
             el:    $('#parent .zip'),
             error: 'zipcode',
-            prop:  'zipcode'
+            prop:  'addressZipcode'
         },
         {
             el:    $('#emergency .full-name'),
@@ -156,11 +156,11 @@ function getInputs () {
         },
         {
             el:    $('#notes .allergy-info'),
-            prop:  'allergyInfo'
+            prop:  'infoAllergy'
         },
         {
             el:    $('#notes .special-instruction'),
-            prop:  'specialInstruction'
+            prop:  'infoSpecial'
         }
     ]
 }
@@ -227,7 +227,8 @@ function process (inputs) {
     var emergencyPhone = _.map(_.filter(withoutProps, function (input) { return input.error.slice(0,1) === 'e' }), function (input) { return input.el.val()});
     _.each(withProps, function (input) { attributes[input.prop] = input.el.val(); });
 
-    attributes.childBirthday  = new Date(birthDay[0], birthDay[1], birthDay[2]);
+    // attributes.childBirthday  = new Date(birthDay[0], birthDay[1], birthDay[2]);
+    attributes.childBirthday  = birthDay[1]+'/'+birthDay[2]+'/'+birthDay[0];
     attributes.parentPhone    = '('+parentPhone[0]+') '   +parentPhone[1]   +'-'+parentPhone[2];
     attributes.emergencyPhone = '('+emergencyPhone[0]+') '+emergencyPhone[1]+'-'+emergencyPhone[2];
     

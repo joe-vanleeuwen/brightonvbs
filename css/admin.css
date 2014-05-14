@@ -1,0 +1,47 @@
+.admin-table {
+    border-collapse: collapse;
+}
+
+.admin-table td, .admin-table th {
+    font-size: 2em;
+    border: 1px solid black;
+    padding: .5em;
+    white-space:nowrap;
+}
+
+.admin-table th {
+    font-family: 'Mission Gothic Bold', sans-serif;
+}
+
+.child {
+    color: #122245;
+    background: #4A8BBC;
+}
+
+.parent {
+    color: #124144;
+    background: #4AB6BC;
+}
+
+.emergency {
+    color: #442712;
+    background: #BC674A;
+}
+
+.info {
+    color: #443A12;
+    background: #BC904A;
+}
+
+.tar {
+    text-align: right;
+}
+
+.allergy, .special {
+    background: #D9DAA1;
+    cursor: default;
+}
+
+#info-text {
+    padding: 0;
+}

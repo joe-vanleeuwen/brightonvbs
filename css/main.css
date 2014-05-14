@@ -391,7 +391,7 @@ textarea {
 
 /* TABLE */
 
-table {
+.form table {
     border-collapse: collapse;
     display: inline-block;
     vertical-align: top;
@@ -402,7 +402,7 @@ table {
     /*margin-bottom: 0;*/
 }
 
-th {
+.form th {
     font-size: 4em;
     margin-bottom: .5em;
     font-weight: 400;
@@ -411,16 +411,16 @@ th {
     text-align: left;
 }
 
-td {
+.form td {
     padding: 10px 10px 0 0;
 }
 
-tr:first-child td {
+.form tr:first-child td {
     border-top: 3px solid #4A8BBC;
     padding-top: 15px;
 }
 
-td:first-child { 
+.form td:first-child { 
     font-size: 2em;
     text-align: right;
 }
@@ -501,17 +501,6 @@ td:first-child {
 
 .ok {
     color: #FFF;
-/*    height: 2em;
-    width: 4em;
-    text-align: center;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    line-height: 2em;
-    font-size: 3em;
-    background: #4A8BBC;
-    cursor: pointer;
-    float: right;*/
 }
 
 /**
