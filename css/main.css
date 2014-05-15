@@ -240,7 +240,7 @@ hr {
 
 /* event info */
 .event-info {
-    width: 56em;
+    width: 65em;
     margin: 0 auto;
 }
 
@@ -261,7 +261,6 @@ hr {
 
 .rbc-logo {
     width: 20em;
-    margin-left: -5em;
     display: inline-block;
 }
 
