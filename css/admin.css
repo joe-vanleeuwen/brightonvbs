@@ -1,3 +1,8 @@
+.table-container {
+    padding: 50px;
+    display: table;
+}
+
 .logout-nav {
     display: none;
 }
