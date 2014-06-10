@@ -228,7 +228,7 @@ function process (inputs) {
     var birthDay       = _.map(_.filter(withoutProps, function (input) { return input.error.slice(0,1) === 'c' }), function (input) { return parseInt(input.el.val()) });
     var parentPhone    = _.map(_.filter(withoutProps, function (input) { return input.error.slice(0,1) === 'p' }), function (input) { return input.el.val()});
     var emergencyPhone = _.map(_.filter(withoutProps, function (input) { return input.error.slice(0,1) === 'e' }), function (input) { return input.el.val()});
-    _.each(withProps, function (input) { attributes[input.prop] = input.prop.slice(0,4) !== 'info' ? input.el.val() : input.el.val().trim().split(' ').length === 1 ? '' : input.el.val(); });
+    _.each(withProps, function (input) { attributes[input.prop] = input.prop.slice(0,4) !== 'info' ? input.el.val() : (input.el.val().trim() === 'n/a' || input.el.val().trim() === 'N/A' || input.el.val().trim() === 'none' || input.el.val().trim() === 'None' || input.el.val().trim() === 'NONE') ? '' : input.el.val(); });
 
     // attributes.childBirthday  = new Date(birthDay[0], birthDay[1], birthDay[2]);
     attributes.childBirthday  = birthDay[1]+'/'+birthDay[2]+'/'+birthDay[0];
@@ -245,8 +245,10 @@ function submit () {
 
         if (errors.length) return displayErrors(errors);
 
+        // chose to have success modal display immediately since people submitted twice.
+        displaySuccess();
         var Applicant = Parse.Object.extend('Applicant');
-        var applicant = new Applicant(process(getInputs())).save().then(function () { displaySuccess(); });
+        var applicant = new Applicant(process(getInputs())).save();
     })
 }
 
